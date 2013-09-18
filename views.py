@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -11,7 +11,7 @@ def quiz_dashboard(request):
 	quizzes = Quiz.objects.filter(students=student)
 	scores = Score.objects.filter(student=student)
 	
-	return render_to_response('quiz/quiz_dashboard.html', { 'quizzes': quizzes, 'scores': scores }, context_instance=RequestContext(request))
+	return render(request,'quiz/quiz_dashboard.html', { 'quizzes': quizzes, 'scores': scores })
 
 def quiz_detail(request, slug):
 	quiz = get_object_or_404(Quiz, slug__iexact=slug)
@@ -19,10 +19,10 @@ def quiz_detail(request, slug):
 		score = quiz.score_set.get(student=request.user, quiz=quiz)
 		questions = quiz.question_set.all()
 		corrent_anwser = score.corrent_anwsers
-		return render_to_response('quiz/quiz_score.html', { 'quiz': quiz, 'score': score, 'questions': questions, 'corrent_anwser': corrent_anwser })
+		return render(request,'quiz/quiz_score.html', { 'quiz': quiz, 'score': score, 'questions': questions, 'corrent_anwser': corrent_anwser })
 	except Score.DoesNotExist:
 		form_list = quiz_forms(quiz)
-		return render_to_response('quiz/quiz_detail.html', { 'form_list': form_list, 'quiz': quiz }, context_instance=RequestContext(request))
+		return render(request,'quiz/quiz_detail.html', { 'form_list': form_list, 'quiz': quiz }, context_instance=RequestContext(request))
 
 def process_quiz(request, slug):
 	quiz = get_object_or_404(Quiz, slug__iexact=slug)
