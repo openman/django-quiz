@@ -16,3 +16,4 @@ for example:
     urlpatterns += patterns('',
         url(r'^quiz/', include('django_quiz.urls')),
     )
+
