@@ -9,9 +9,7 @@ Installation
 
 1. Add `quiz` to the `INSTALLED_APPS` in your project's `settings.py`
 
-2. Include the `quiz` URLconf in your project `urls.py` like this::
-
-      url(r'^quiz/', include('quiz.urls')),
+2. Include the `quiz` URLconf in your project `urls.py` like this `url(r'^quiz/', include('quiz.urls')),`
 
 3. Run `python manage.py syncdb` to create the `quiz` models.
 

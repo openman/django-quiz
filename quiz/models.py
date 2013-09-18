@@ -148,3 +148,6 @@ class Score(models.Model):
 	
 	def __unicode__(self):
 		return u"%s took the quiz %s" % (self.student, self.quiz)
+admin.site.register(Answer)
+admin.site.register(Question)
+admin.site.register(Score)
